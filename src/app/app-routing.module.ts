@@ -18,6 +18,14 @@ const routes: Routes = [
         loadComponent: () => import('./demo/dashboard/default/default.component').then((c) => c.DefaultComponent)
       },
       {
+        path: 'todo',
+        loadComponent: () => import('./demo/pages/todo/todo.component').then((c) => c.TodoComponent)
+      },
+      {
+        path: 'calendar',
+        loadComponent: () => import('./demo/pages/calendario/calendario.component').then((c) => c.CalendarioComponent)
+      },
+      {
         path: 'typography',
         loadComponent: () => import('./demo/elements/typography/typography.component')
       },

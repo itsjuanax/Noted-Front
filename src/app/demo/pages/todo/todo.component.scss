@@ -1,0 +1,89 @@
+
+.todo-container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0f2f5;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+  gap: 10px;
+}
+
+
+
+li:hover {
+  background-color: #e2e8f0; 
+}
+
+li span {
+  flex-grow: 1;
+  font-size: 14px;
+  color: #333;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+input[type="checkbox"] {
+  accent-color: #007bff; 
+  width: 18px;
+  height: 18px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+button:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.add-task-container {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.add-task-container input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px 0 0 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.add-task-container button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 0 6px 6px 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-task-container button:hover {
+  background-color: #0056b3;
+}

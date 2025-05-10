@@ -23,13 +23,14 @@
           <div class="saprator mt-3">
             <span>or</span>
           </div>
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
           <h5 class="my-4 d-flex justify-content-center">Sign in with Email address</h5>
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" value="info@codedthemes.com" />
-            <label for="floatingInput">Email address / Username</label>
+            <input matInput type="email" class="form-control" id="floatingInput" formControlName="email" />
+            <label for="floatingInput">Email</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="password" value="12345" />
+            <input matInput type="password" class="form-control" id="password" formControlName="password" />
             <label for="password">Password</label>
           </div>
           <div class="d-flex mt-1 justify-content-between">
@@ -42,8 +43,9 @@
             </h5>
           </div>
           <div class="d-grid mt-4">
-            <button type="button" class="btn btn-secondary">Sign In</button>
+            <button type="submit" class="btn btn-secondary">Sign In</button>
           </div>
+        </form>
           <hr />
           <h5 class="d-flex justify-content-center">
             <a [routerLink]="['/guest/register']">Don't have an account?</a>
