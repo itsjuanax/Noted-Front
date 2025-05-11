@@ -39,31 +39,26 @@ export const NavigationItems: NavigationItem[] = [
     type: 'group',
     icon: 'icon-navigation',
     children: [
+      
       {
-        id: 'Authentication',
-        title: 'Authentication',
-        type: 'collapse',
-        icon: 'ti ti-key',
-        children: [
-          {
-            id: 'login',
-            title: 'Login',
-            type: 'item',
-            url: '/guest/login',
-            target: true,
-            breadcrumbs: false
-          },
-          {
-            id: 'register',
-            title: 'Register',
-            type: 'item',
-            url: '/guest/register',
-            target: true,
-            breadcrumbs: false
-          }
-        ]
+        id: 'todo',
+        title: 'To-do list',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/todo',
+        icon: 'ti ti-list-check'
+      },
+      {
+        id: 'calendar',
+        title: 'Calendar',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/calendar',
+        icon: 'ti ti-calendar'
       }
     ]
+
+
   },
   {
     id: 'elements',
