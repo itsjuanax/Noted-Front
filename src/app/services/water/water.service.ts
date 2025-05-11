@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Water } from 'src/app/models/water.model';
 
 @Injectable({
@@ -42,39 +42,13 @@ export class WaterService {
     });
   }
 
-  /**
-   * Agrupa los registros por fecha y suma los volúmenes
-   * Devuelve un array con: [{ fecha: '2025-05-11', total: 2000 }]
-   */
-  obtenerResumenDiario(): Observable<{ fecha: string; total: number }[]> {
-    return this.listarWaters().pipe(
-      map((waters) => {
-        const resumen: { [fecha: string]: number } = {};
-
-        for (const w of waters) {
-          resumen[w.fecha] = (resumen[w.fecha] || 0) + w.volumen;
-        }
-
-        return Object.entries(resumen).map(([fecha, total]) => ({
-          fecha,
-          total
-        }));
-      })
-    );
-  }
-
-  eliminarRegistro(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, {
-      headers: this.getHeaders()
-    });
-  }
-
   private convertirAMililitros(cantidad: number, unidad: 'ml' | 'l' | 'oz'): number {
     switch (unidad) {
       case 'ml': return cantidad;
       case 'l': return cantidad * 1000;
-      case 'oz': return cantidad * 29.5735; // 1 oz ≈ 29.57 ml
+      case 'oz': return cantidad * 29.5735;
       default: throw new Error('Unidad no válida');
     }
   }
 }
+
