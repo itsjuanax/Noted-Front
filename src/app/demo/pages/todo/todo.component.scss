@@ -87,3 +87,47 @@ button:hover {
 .add-task-container button:hover {
   background-color: #0056b3;
 }
+
+.input-editar-tarea {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 70%;
+  margin-right: 0.5rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-editar-tarea:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+}
+
+.boton-guardar,
+.boton-cancelar {
+  background-color: #a09ce9;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.boton-cancelar {
+  background-color: #eba1a1;
+}
+
+.boton-guardar:hover,
+.boton-cancelar:hover {
+  transform: scale(1.05);
+}
+
+.boton-guardar:active,
+.boton-cancelar:active {
+  transform: scale(0.95);
+}
+

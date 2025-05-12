@@ -1,0 +1,50 @@
+<div class="historial-container">
+  <h1>Historial de registros de agua</h1>
+
+  <div class="water-list">
+    <div *ngFor="let water of waters" class="water-card" [class.editando]="editandoId === water.id">
+
+      <!-- Si está editando este registro -->
+      <div *ngIf="editandoId === water.id; else modoLectura">
+        <form (ngSubmit)="guardarEdicion(water.id)">
+          <label>Fecha:</label>
+          <input type="date" [(ngModel)]="water.fecha" name="fecha-{{water.id}}" required>
+
+          <label>Litros tomados:</label>
+          <input type="number" [(ngModel)]="water.litrosTomadosDia" name="litros-{{water.id}}" min="0" required>
+
+          <div class="editar-actions">
+            <button type="submit">Guardar</button>
+            <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Si no está editando este registro -->
+      <ng-template #modoLectura>
+        <p><strong>Fecha:</strong> {{ water.fecha | date: 'fullDate' }}</p>
+        <p><strong>Litros tomados:</strong> {{ water.litrosTomadosDia }} L</p>
+
+        <!-- Evaluar si cumplió la meta -->
+        <p *ngIf="water.litrosTomadosDia >= 2" class="meta-cumplida">
+          🎉 ¡Meta diaria de hidratación alcanzada!
+        </p>
+        <p *ngIf="water.litrosTomadosDia < 2" class="meta-no-cumplida">
+          😔 No alcanzaste tu meta diaria de hidratación.
+        </p>
+
+        <button (click)="activarEdicion(water.id)" class="editar-btn">Editar</button>
+      </ng-template>
+
+    </div>
+  </div>
+    <p *ngIf="waters.length === 0">No hay registros de agua.</p>
+
+  <div class="stats-container" *ngIf="totalRegistros > 0">
+  <p><strong>🏆 Progreso de hidratación:</strong></p>
+  <p>Has registrado <strong>{{ totalRegistros }}</strong> días.</p>
+  <p>Has cumplido la meta en <strong>{{ totalCumplidos }}</strong> días.</p>
+  <p><strong>Porcentaje de éxito: {{ porcentajeCumplimiento }}%</strong></p>
+</div>
+
+</div>

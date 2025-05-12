@@ -1,0 +1,52 @@
+<div class="historial-container">
+    <h1>Historial de registros de sueño</h1>
+    <div *ngFor="let sleep of sleeps" class="sleep-card">
+
+        <!-- Si está editando este registro -->
+        <div class="water-list">
+            <div *ngIf="editandoId === sleep.id; else modoLectura">
+                <form (ngSubmit)="guardarEdicion(sleep.id)">
+                    <label>Fecha:</label>
+                    <input type="date" [(ngModel)]="sleep.fecha" name="fecha-{{sleep.id}}" required>
+
+                    <label>Hora de Dormir:</label>
+                    <input type="time" [(ngModel)]="sleep.horaDormir" name="horaDormir-{{sleep.id}}" required>
+
+                    <label>Hora de Despertar:</label>
+                    <input type="time" [(ngModel)]="sleep.horaDespertar" name="horaDespertar-{{sleep.id}}" required>
+
+                    <label>Calidad:</label>
+                    <input type="number" [(ngModel)]="sleep.calidad" min="1" max="10" name="calidad-{{sleep.id}}"
+                        required>
+
+                    <label>¿Soñaste?:</label>
+                    <select [(ngModel)]="sleep.sueno" name="sueno-{{sleep.id}}" required>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+
+                    <label>Notas Adicionales:</label>
+                    <textarea [(ngModel)]="sleep.notasAdicionales" name="notasAdicionales-{{sleep.id}}"></textarea>
+
+                    <div class="editar-actions">
+                        <button type="submit">Guardar</button>
+                        <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Si no está editando este registro -->
+            <ng-template #modoLectura>
+                <p><strong>Fecha:</strong> {{ sleep.fecha | date: 'fullDate' }}</p>
+                <p><strong>Hora de Dormir:</strong> {{ sleep.horaDormir }}</p>
+                <p><strong>Hora de Despertar:</strong> {{ sleep.horaDespertar }}</p>
+                <p><strong>Duración:</strong> {{ formatDuration(sleep.duracion) }}</p>
+                <p><strong>Calidad:</strong> {{ sleep.calidad }}/10</p>
+                <p><strong>¿Soñaste?:</strong> {{ sleep.sueno }}</p>
+                <p *ngIf="sleep.notasAdicionales" class="nota"><strong>Notas:</strong> {{ sleep.notasAdicionales }}</p>
+
+                <button (click)="activarEdicion(sleep.id)" class="editar-btn">Editar</button>
+            </ng-template>
+        </div>
+    </div>
+</div>

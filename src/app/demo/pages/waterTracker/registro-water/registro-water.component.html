@@ -1,0 +1,26 @@
+<div class="registro-water-container">
+  <h2>Registro de Agua</h2>
+
+  <form [formGroup]="waterForm" (ngSubmit)="addWater()">
+    <!-- Campo de fecha -->
+    <div class="form-group">
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" formControlName="fecha">
+      <div class="error" *ngIf="waterForm.get('fecha')?.invalid && waterForm.get('fecha')?.touched">
+        La fecha es obligatoria.
+      </div>
+    </div>
+
+    <!-- Campo de litros -->
+    <div class="form-group">
+      <label for="litros">Litros tomados:</label>
+      <input type="number" id="litros" formControlName="litrosTomadosDia" min="0">
+      <div class="error" *ngIf="waterForm.get('litrosTomadosDia')?.invalid && waterForm.get('litrosTomadosDia')?.touched">
+        Ingresa un valor válido de litros.
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <button type="submit" [disabled]="waterForm.invalid">Registrar</button>
+  </form>
+</div>

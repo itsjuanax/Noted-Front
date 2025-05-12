@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-calendario',
@@ -31,7 +32,7 @@ export class CalendarioComponent implements OnInit {
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
   ];
   
-  constructor(private eventoService: EventoService) { }
+  constructor(private eventoService: EventoService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.eventoService.listarEventos().subscribe({
@@ -126,21 +127,25 @@ export class CalendarioComponent implements OnInit {
     const day = this.diaSeleccionado.getDate().toString().padStart(2, '0');
     const fecha = `${year}-${month}-${day}`;
 
-    const nuevoEvento = {
+    const nuevoEvento: { titulo: string; fecha: string; descripcion: string | null; hora?: string | null } = {
       titulo: this.eventForm.value.titulo,
       fecha: fecha,
       descripcion: this.eventForm.value.descripcion || null,
-      hora: this.eventForm.value.hora || null
     };
+
+    if (this.eventForm.value.hora) {
+      nuevoEvento.hora = this.eventForm.value.hora;
+    }
 
     this.eventoService.addEvento(nuevoEvento).subscribe({
       next: (eventoCreado) => {
         this.eventos.push(eventoCreado);
+        this.alertService.alertaSuccess('Evento creado con éxito','');
         this.cerrarModal();
       },
       error: (err) => {
         console.error('Error al crear evento:', err);
-        alert('Error al crear evento');
+        this.alertService.alertaError('Error al crear evento','');
       }
     });
   }
@@ -177,7 +182,6 @@ export class CalendarioComponent implements OnInit {
       hora: this.eventoSeleccionado.hora || ''
     });
   
-    // En vez de cambiar a Date, extrae directo el día
     const fechaPartes = this.eventoSeleccionado.fecha.split('T')[0].split('-');
     const year = parseInt(fechaPartes[0], 10);
     const month = parseInt(fechaPartes[1], 10) - 1;
@@ -209,17 +213,23 @@ export class CalendarioComponent implements OnInit {
     };
   
     this.eventoService.updateEvento(this.idEventoEditando, eventoActualizado).subscribe({
-      next: (eventoActualizadoRespuesta) => {
-        // Actualizamos localmente el evento en la lista
-        const index = this.eventos.findIndex(e => e.id === this.idEventoEditando);
-        if (index !== -1) {
-          this.eventos[index] = {...this.eventos[index], ...eventoActualizado};
-        }
+      next: () => {
+        this.eventoService.listarEventos().subscribe({
+          next: (res) => {
+            this.eventos = res;
+            console.log('Eventos actualizados:', res);
+            this.alertService.alertaSuccess('Evento actualizado con éxito','');
+          },
+          error: (err) => {
+            console.error('Error al cargar eventos:', err);
+          }
+        });
+
         this.cerrarModal();
       },
       error: (err) => {
         console.error('Error al actualizar evento:', err);
-        alert('Error al actualizar evento');
+        this.alertService.alertaError('Error al actualizar evento','');
       }
     });
   }
@@ -229,19 +239,30 @@ export class CalendarioComponent implements OnInit {
   eliminarEvento() {
     if (!this.eventoSeleccionado) return;
   
-    if (confirm('¿Estás seguro de que quieres eliminar este evento?')) {
+    this.alertService.alertaConConfirmacion('¿Estás seguro de que deseas eliminar este evento?','').then((result) => {
+      if (result.isConfirmed) {
       this.eventoService.deleteEvento(this.eventoSeleccionado.id).subscribe({
         next: () => {
-          // Eliminamos de la lista local también
-          this.eventos = this.eventos.filter(e => e.id !== this.eventoSeleccionado?.id);
+          this.eventoService.listarEventos().subscribe({
+            next: (res) => {
+              this.eventos = res;
+              console.log('Eventos actualizados:', res);
+
+            },
+            error: (err) => {
+              console.error('Error al cargar eventos:', err);
+            }
+          });
+          this.alertService.alertaSuccess('Evento eliminado con éxito','');
           this.cerrarModal();
         },
         error: (err) => {
           console.error('Error al eliminar evento:', err);
-          alert('Error al eliminar evento');
+          this.alertService.alertaError('Error al eliminar evento','');
         }
       });
     }
-  }
+    }
+  )}
   
 }

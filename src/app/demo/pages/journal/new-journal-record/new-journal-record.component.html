@@ -1,0 +1,16 @@
+<div class="todo-container">
+  <h2>Agregar Entrada del Día</h2>
+
+  <form [formGroup]="journalForm" (ngSubmit)="addJournal()">
+    <input type="date" formControlName="fecha" placeholder="Fecha" />
+    <input type="text" formControlName="titulo" placeholder="Título" />
+    <textarea formControlName="contenido" placeholder="Contenido principal"></textarea>
+    <textarea formControlName="emociones" placeholder="¿Cómo te sentiste hoy? (opcional)"></textarea>
+    <textarea formControlName="pensamientos" placeholder="Pensamientos del día (opcional)"></textarea>
+    <textarea formControlName="notasAdicionales" placeholder="Notas adicionales (opcional)"></textarea>
+    
+    <div class="acciones">
+      <button type="submit" [disabled]="journalForm.invalid">Guardar entrada</button>
+    </div>
+  </form>
+</div>

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-todo',
@@ -18,7 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class TodoComponent implements OnInit {
 
-  constructor(private tareaService: TareaService) { }
+  constructor(private tareaService: TareaService,
+    private alertService: AlertService
+  ) { }
 
   tareaForm = new FormGroup({
     titulo: new FormControl('', [Validators.required])
@@ -60,19 +63,20 @@ export class TodoComponent implements OnInit {
 
   toggleCompletada(tarea: Tarea) {
     const nuevoEstado = !tarea.completada;
-  
+
     this.tareaService.updateTarea(tarea.id!, {
       completada: nuevoEstado
     }).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log('Respuesta del backend:', res);
         tarea.completada = nuevoEstado;
       },
       error: (err) => console.error('Error al cambiar estado de completada:', err)
     });
   }
-  
-  
-  
+
+
+
   editandoId: string | null = null;
   tareaEditada: string = '';
 
@@ -95,22 +99,33 @@ export class TodoComponent implements OnInit {
       completada: tarea.completada
     }).subscribe({
       next: () => {
-        tarea.titulo = nuevoTitulo;
-        this.cancelarEdicion();
+        this.tareaService.listarTareas().subscribe({
+          next: (res) => {
+            this.tareas = res;
+            console.log('Tareas cargadas:', res);
+          },
+          error: (err) => {
+            console.error('Error al cargar tareas:', err);
+          }
+        });
       },
       error: (err) => console.error('Error al editar tarea:', err)
     });
+    this.cancelarEdicion();
   }
 
   eliminarTarea(tareaId: string) {
-    if (!confirm('¿Estás seguro de que deseas eliminar esta tarea?')) return;
-  
-    this.tareaService.deleteTarea(tareaId).subscribe({
-      next: () => {
-        this.tareas = this.tareas.filter(t => t.id !== tareaId);
-      },
-      error: (err) => console.error('Error al eliminar tarea:', err)
+    this.alertService.alertaConConfirmacion('¿Estás seguro de que deseas eliminar esta tarea?', '').then((result) => {
+      if (result.isConfirmed) {
+        this.tareaService.deleteTarea(tareaId).subscribe({
+          next: () => {
+            this.tareas = this.tareas.filter(t => t.id !== tareaId);
+          },
+          error: (err) => console.error('Error al eliminar tarea:', err)
+        });
+      }
     });
+
   }
-  
+
 }

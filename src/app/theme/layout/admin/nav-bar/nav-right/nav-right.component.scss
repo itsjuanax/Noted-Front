@@ -1,3 +1,36 @@
 .me-0 {
   margin: 0 0 0 16px !important;
 }
+
+.dropdown-user-profile {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.dropdown-user-profile h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #343a40; /* Gris oscuro */
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  color: #343a40;
+  font-weight: 500;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f2f5;
+  color: #007bff;
+}
+
+.dropdown-item i {
+  color: #007bff;
+}
+

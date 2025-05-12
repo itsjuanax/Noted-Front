@@ -1,0 +1,80 @@
+<div class="perfil-container">
+  <div class="perfil-card">
+    <div class="perfil-header">
+      <img src="assets/images/user/avatar-2.jpg" alt="Foto de perfil" class="perfil-foto" />
+      <div class="perfil-info">
+        <h2>{{ nombreUsuario }}</h2>
+        <p>{{ emailUsuario }}</p>
+      </div>
+    </div>
+
+    <!-- Vista normal del perfil -->
+    <div class="perfil-body" *ngIf="!modoEdicion">
+      <h3>Información Personal</h3>
+      <ul>
+        <li><strong>Nombre completo:</strong> {{ nombreCompleto }}</li>
+        <li><strong>Nombre de usuario:</strong> {{ nombreUsuario }}</li>
+        <li><strong>Correo electrónico:</strong> {{ emailUsuario }}</li>
+      </ul>
+
+      <div class="perfil-actions">
+        <button class="btn-editar" (click)="editarPerfil()">Editar Perfil</button>
+        <button class="btn-editar" (click)="abrirCambioPassword()">Cambiar Contraseña</button>
+        <button class="btn-eliminar" (click)="eliminarCuenta()">Eliminar Cuenta</button>
+      </div>
+    </div>
+
+    <!-- Formulario de edición -->
+    <div class="perfil-body" *ngIf="modoEdicion">
+      <h3>Editar Información Personal</h3>
+      <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()">
+        <ul>
+          <li>
+            <strong>Nombre completo:</strong>
+            <input type="text" formControlName="nombreCompleto" />
+          </li>
+          <li>
+            <strong>Nombre de usuario:</strong>
+            <input type="text" formControlName="nombreUsuario" />
+          </li>
+          <li>
+            <strong>Correo electrónico:</strong>
+            <input type="email" formControlName="email" />
+          </li>
+        </ul>
+
+        <div class="perfil-actions">
+          <button type="submit" class="btn-editar" [disabled]="perfilForm.invalid">Guardar Cambios</button>
+          <button type="button" class="btn-eliminar" (click)="cancelarEdicion()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="perfil-body cambio-password" *ngIf="cambiandoPassword">
+        <h3>Cambiar Contraseña</h3>
+        <form [formGroup]="cambioPasswordForm" (ngSubmit)="guardarNuevaPassword()">
+            <ul>
+            <li>
+                <strong>Contraseña Actual:</strong>
+                <input type="password" formControlName="passwordActual" />
+            </li>
+            <li>
+                <strong>Nueva Contraseña:</strong>
+                <input type="password" formControlName="passwordNueva" />
+            </li>
+            <li>
+                <strong>Confirmar Nueva Contraseña:</strong>
+                <input type="password" formControlName="confirmarPassword" />
+            </li>
+            </ul>
+
+            <div class="perfil-actions">
+            <button type="submit" class="btn-editar" [disabled]="cambioPasswordForm.invalid">Guardar Nueva Contraseña</button>
+            <button type="button" class="btn-eliminar" (click)="cancelarCambioPassword()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+
+  </div>
+</div>

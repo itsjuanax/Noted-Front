@@ -16,7 +16,7 @@ export class UserService {
     return this.http.post(endpoint, user);
   }
 
-  updateUsuario(userId: string, userData: User){
+  updateUsuario(userId: string, userData: Partial<User>){
     const endpoint = `${this.apiUrl}/${userId}`;
     const headers = {
       'Content-Type': 'application/json',
@@ -33,6 +33,15 @@ export class UserService {
       'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
     }
     const body = { estado };
-    return this.http.put<User>(endpoint, body, {headers});
+    return this.http.post<User>(endpoint, body, {headers});
+  }
+
+  getUserById(userId: string): Observable<User> {
+    const endpoint = `${this.apiUrl}/${userId}`;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
+    }
+    return this.http.get<User>(endpoint, {headers});
   }
 }

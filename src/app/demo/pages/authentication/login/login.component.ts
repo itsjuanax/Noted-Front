@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule} from '@angular/common';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export default class LoginComponent {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private userService: UserService,private authService: AuthService, private router: Router, private alertService: AlertService) { }
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -33,12 +35,28 @@ export default class LoginComponent {
     this.authService.login(email, password).subscribe({
       next: (res) => {
         localStorage.setItem('AuthToken', res.token);
-        this.router.navigate(['/default']);
+        const userId = this.authService.getUserIdFromToken();
+        if(userId) {
+          this.userService.getUserById(userId).subscribe({
+            next: (usuario) => {
+              if(usuario.estado !== 'Activo') {
+                this.alertService.alertaError('Cuenta desactivada', 'Ya no puedes ingresar porque desactivaste tu cuenta.');
+                localStorage.removeItem('AuthToken');
+              }else{
+                this.router.navigate(['/default']);
+              }
+            },
+            error: (err) => {
+              console.error('Error al cargar nombre de usuario:', err);
+            }
+          });
+
+        }
         
       },
       error: (err) => {
         console.log(err);
-        alert('Error al iniciar sesión');
+        this.alertService.alertaError('Error al iniciar sesión', 'Verifica tu correo o contraseña');
       },
     });
   }

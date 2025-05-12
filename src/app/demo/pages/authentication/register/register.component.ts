@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule} from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user/user.service';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./register.component.scss']
 })
 export default class RegisterComponent {
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private alertService: AlertService) { }
 
   registerForm = new FormGroup({
     nombreCompleto: new FormControl('', [Validators.required]),
@@ -44,12 +45,12 @@ export default class RegisterComponent {
       next: (res)=>{
         console.log(res);
         console.log(res.id)
-        alert('Usuario creado con exito!');
+        this.alertService.alertaSuccess('Usuario creado con éxito', 'Ya puedes iniciar sesión');
         this.router.navigate(['/guest/login']);
       },
       error: (err)=>{
         console.log(err);
-        alert('Error al crear el usuario');
+        this.alertService.alertaError('Error al crear el usuario', 'Asegurate de que todos los campos sean correctos');
       }
 
     });
