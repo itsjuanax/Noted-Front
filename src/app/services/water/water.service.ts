@@ -31,7 +31,7 @@ export class WaterService {
   }
 
   registrarConsumo(cantidad: number, unidad: 'ml' | 'l' | 'oz'): Observable<Water> {
-    const volumenML = this.convertirAMililitros(cantidad, unidad);
+    const volumenML = this.convertirMililitros(cantidad, unidad);
     const body = {
       volumen: volumenML,
       fecha: new Date().toISOString().split('T')[0]  // formato YYYY-MM-DD
@@ -42,7 +42,7 @@ export class WaterService {
     });
   }
 
-  private convertirAMililitros(cantidad: number, unidad: 'ml' | 'l' | 'oz'): number {
+  private convertirMililitros(cantidad: number, unidad: 'ml' | 'l' | 'oz'): number {
     switch (unidad) {
       case 'ml': return cantidad;
       case 'l': return cantidad * 1000;
