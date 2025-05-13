@@ -21,42 +21,32 @@
           <div class="saprator mt-3">
             <span>or</span>
           </div>
-          <h5 class="my-4 d-flex justify-content-center">Sign Up with Email address</h5>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-                <label for="floatingInput">First Name</label>
-              </div>
+          <form [formGroup]="registerForm" (ngSubmit)="addUser()">
+            <div class="form-floating mb-3">
+              <input matInput type="nombreCompleto" class="form-control" formControlName="nombreCompleto" placeholder="Nombre completo" />
+              <label>Nombre Completo</label>
             </div>
-            <div class="col-md-6">
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-                <label for="floatingInput">Last Name</label>
-              </div>
+          
+            <div class="form-floating mb-3">
+              <input matInput type="nombreUsuario" class="form-control" formControlName="nombreUsuario" placeholder="Nombre de usuario" />
+              <label>Nombre de Usuario</label>
             </div>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-            <label for="floatingInput">Email Address / Username</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-            <label for="floatingInput">Password</label>
-          </div>
-          <div class="form-check mt-3s">
-            <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-            <label class="form-check-label" for="customCheckc1">
-              <h5>
-                Agree with
-                <span>Terms & Condition.</span>
-              </h5>
-            </label>
-          </div>
-          <div class="d-grid mt-4">
-            <button type="button" class="btn btn-secondary p-2">Sign Up</button>
-          </div>
-          <hr />
+          
+            <div class="form-floating mb-3">
+              <input matInput type="email" class="form-control" formControlName="email" placeholder="Correo electrónico" />
+              <label>Email</label>
+            </div>
+          
+            <div class="form-floating mb-3">
+              <input matInput type="password" class="form-control" formControlName="password" placeholder="Contraseña" />
+              <label>Password</label>
+            </div>
+          
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-secondary p-2">Sign Up</button>
+            </div>
+          </form>
+          
           <h5 class="d-flex justify-content-center">
             <a [routerLink]="['/guest/login']">Already have an account?</a>
           </h5>

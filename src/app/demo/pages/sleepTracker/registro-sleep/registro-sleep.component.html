@@ -1,0 +1,46 @@
+<div class="registro-sleep-container">
+  <h1>Nuevo Registro de Sueño</h1>
+
+  <form [formGroup]="sleepForm" (ngSubmit)="addSleep()" class="sleep-form">
+
+    <label for="fecha">Fecha:</label>
+    <input id="fecha" type="date" formControlName="fecha">
+    <div *ngIf="sleepForm.get('fecha')?.invalid && sleepForm.get('fecha')?.touched" class="error">
+      La fecha es obligatoria.
+    </div>
+
+    <label for="horaDormir">Hora de Dormir:</label>
+    <input id="horaDormir" type="time" formControlName="horaDormir">
+    <div *ngIf="sleepForm.get('horaDormir')?.invalid && sleepForm.get('horaDormir')?.touched" class="error">
+      La hora de dormir es obligatoria.
+    </div>
+
+    <label for="horaDespertar">Hora de Despertar:</label>
+    <input id="horaDespertar" type="time" formControlName="horaDespertar">
+    <div *ngIf="sleepForm.get('horaDespertar')?.invalid && sleepForm.get('horaDespertar')?.touched" class="error">
+      La hora de despertar es obligatoria.
+    </div>
+
+    <label for="calidad">Calidad del Sueño (1-10):</label>
+    <input id="calidad" type="number" formControlName="calidad" min="1" max="10">
+    <div *ngIf="sleepForm.get('calidad')?.invalid && sleepForm.get('calidad')?.touched" class="error">
+      La calidad debe ser un número entre 1 y 10.
+    </div>
+
+    <label for="sueno">¿Soñaste durante la noche?</label>
+    <select id="sueno" formControlName="sueno">
+      <option value="">Seleccione una opción</option>
+      <option value="Sí">Sí</option>
+      <option value="No">No</option>
+    </select>
+    <div *ngIf="sleepForm.get('sueno')?.invalid && sleepForm.get('sueno')?.touched" class="error">
+      Este campo es obligatorio.
+    </div>
+
+    <label for="notasAdicionales">Notas Adicionales:</label>
+    <textarea id="notasAdicionales" formControlName="notasAdicionales" rows="3"></textarea>
+
+    <button type="submit" [disabled]="sleepForm.invalid">Guardar Registro</button>
+
+  </form>
+</div>

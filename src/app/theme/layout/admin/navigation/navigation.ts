@@ -39,90 +39,117 @@ export const NavigationItems: NavigationItem[] = [
     type: 'group',
     icon: 'icon-navigation',
     children: [
+
       {
-        id: 'Authentication',
-        title: 'Authentication',
+        id: 'todo',
+        title: 'To-do list',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/todo',
+        icon: 'ti ti-list-check'
+      },
+      {
+        id: 'calendar',
+        title: 'Calendar',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/calendar',
+        icon: 'ti ti-calendar'
+      },
+      {
+        id: 'sleepTrackers',
+        title: 'Sleep Tracker',
         type: 'collapse',
-        icon: 'ti ti-key',
+        icon: 'ti ti-bed',
         children: [
           {
-            id: 'login',
-            title: 'Login',
+            id: 'historial',
+            title: 'Historial',
             type: 'item',
-            url: '/guest/login',
-            target: true,
-            breadcrumbs: false
+            classes: 'nav-item',
+            url: '/sleepTrackers/historial',
+            icon: 'ti ti-history'
           },
           {
-            id: 'register',
-            title: 'Register',
+            id: 'addRecord',
+            title: 'Agregar Registro',
             type: 'item',
-            url: '/guest/register',
-            target: true,
-            breadcrumbs: false
+            classes: 'nav-item',
+            url: '/sleepTrackers/addRecord',
+            icon: 'ti ti-plus'
           }
         ]
+      },
+      {
+        id: 'journal',
+        title: 'Journal',
+        type: 'collapse',
+        icon: 'ti ti-notebook',
+        children: [
+          {
+            id: 'historial',
+            title: 'Historial',
+            type: 'item',
+            classes: 'nav-item',
+            url: '/journal/historial',
+            icon: 'ti ti-history'
+          },
+          {
+            id: 'addRecord',
+            title: 'Agregar Registro',
+            type: 'item',
+            classes: 'nav-item',
+            url: '/journal/addRecord',
+            icon: 'ti ti-plus'
+          }
+        ]
+      },
+      {
+        id: 'waterTracker',
+        title: 'Water Tracker',
+        type: 'collapse',
+        icon: 'ti ti-droplet',
+        children: [
+          {
+            id: 'historial',
+            title: 'Historial',
+            type: 'item',
+            classes: 'nav-item',
+            url: '/waterTracker/historial',
+            icon: 'ti ti-history'
+          },
+          {
+            id: 'addRecord',
+            title: 'Agregar Registro',
+            type: 'item',
+            classes: 'nav-item',
+            url: '/waterTracker/addRecord',
+            icon: 'ti ti-plus'
+          }
+        ]
+      },
+      {
+        id: 'moodWeekly',
+        title: 'Mood Tracker Weekly',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/moodWeekly',
+        icon: 'ti ti-mood-smile'
+      },
+
+      {
+        id: 'moodMonthly',
+        title: 'Mood Tracker Monthly',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/moodMonthly',
+        icon: 'ti ti-masks-theater'
       }
+      
+
+
     ]
+
+
   },
-  {
-    id: 'elements',
-    title: 'Elements',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'typography',
-        title: 'Typography',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/typography',
-        icon: 'ti ti-typography'
-      },
-      {
-        id: 'color',
-        title: 'Colors',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/color',
-        icon: 'ti ti-brush'
-      },
-      {
-        id: 'tabler',
-        title: 'Tabler',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://tabler-icons.io/',
-        icon: 'ti ti-plant-2',
-        target: true,
-        external: true
-      }
-    ]
-  },
-  {
-    id: 'other',
-    title: 'Other',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'sample-page',
-        title: 'Sample Page',
-        type: 'item',
-        url: '/sample-page',
-        classes: 'nav-item',
-        icon: 'ti ti-brand-chrome'
-      },
-      {
-        id: 'document',
-        title: 'Document',
-        type: 'item',
-        classes: 'nav-item',
-        url: 'https://codedthemes.gitbook.io/berry-angular/',
-        icon: 'ti ti-vocabulary',
-        target: true,
-        external: true
-      }
-    ]
-  }
 ];

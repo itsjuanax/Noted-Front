@@ -1,0 +1,31 @@
+<div class="todo-container">
+  <h2>Mis Tareas</h2>
+
+  <ul>
+    <li *ngFor="let tarea of tareas">
+      <input type="checkbox" [checked]="tarea.completada" (change)="toggleCompletada(tarea)" />
+
+      <!-- Si está editando esta tarea -->
+      <ng-container *ngIf="editandoId === tarea.id; else vistaNormal">
+        <input class="input-editar-tarea" [(ngModel)]="tareaEditada" placeholder="Nuevo título..." />
+        <button class="boton-guardar" (click)="guardarEdicion(tarea)">💾</button>
+        <button class="boton-cancelar" (click)="cancelarEdicion()">❌</button>
+      </ng-container>
+
+
+      <!-- Vista normal -->
+      <ng-template #vistaNormal>
+        <span [class.completed]="tarea.completada">{{ tarea.titulo }}</span>
+        <button (click)="editarTarea(tarea)">✏</button>
+        <button (click)="eliminarTarea(tarea.id!)">🗑</button>
+      </ng-template>
+    </li>
+  </ul>
+
+
+  <form [formGroup]="tareaForm" (ngSubmit)="addTarea()">
+    <div class="add-task-container">
+      <input matInput type="titulo" formControlName="titulo" placeholder="Agregar nueva tarea" />
+      <button type="submit">Agregar</button>
+    </div>
+  </form>

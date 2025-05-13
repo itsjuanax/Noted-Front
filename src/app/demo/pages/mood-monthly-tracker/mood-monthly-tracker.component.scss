@@ -1,0 +1,117 @@
+.todo-container {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.nav-buttons button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.calendar-table th, .calendar-table td {
+  width: 14.28%;
+  height: 80px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.calendar-table td:hover {
+  outline: 2px dashed #888;
+  outline-offset: -4px;
+}
+
+.palette-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 1.5rem;
+}
+
+.palette-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.color-box {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.color-box.selected {
+  border-color: black;
+}
+
+.color-box.eraser {
+  background-color: white;
+  border: 1px dashed #aaa;
+}
+
+.label {
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: center;
+}
+
+/* Responsive para celulares */
+@media (max-width: 768px) {
+  .todo-container {
+    padding: 15px;
+  }
+
+  .calendar-table th, .calendar-table td {
+    height: 60px;
+    font-size: 0.8rem;
+  }
+
+  .nav-buttons button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+}

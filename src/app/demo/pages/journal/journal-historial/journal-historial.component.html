@@ -1,0 +1,58 @@
+<div class="todo-container">
+  <h2>Historial del Diario</h2>
+
+  <ul>
+    <li *ngFor="let journal of journals">
+      <!-- Si no se está editando -->
+      <div *ngIf="editandoId !== journal.id" class="journal-view">
+        <span><strong>{{ journal.fecha | date: 'yyyy-MM-dd' }}</strong> - {{ journal.titulo }}</span>
+        <div class="acciones">
+          <button (click)="activarEdicion(journal.id)">✏️</button>
+          <button class="ver-detalles-btn" (click)="abrirModal(journal)">👁️</button>
+        </div>
+      </div>
+
+      <!-- Si se está editando -->
+      <form *ngIf="editandoId === journal.id" (ngSubmit)="guardarEdicion(journal.id)">
+        <label>Fecha</label>
+        <input type="date" [(ngModel)]="journal.fecha" name="fecha-{{journal.id}}" required/>
+
+        <label>Título</label>
+        <input type="text" [(ngModel)]="journal.titulo" name="titulo-{{journal.id}}" required />
+
+        <label>Contenido</label>
+        <textarea [(ngModel)]="journal.contenido" name="contenido-{{journal.id}}" required></textarea>
+
+        <label>¿Cómo te sentiste hoy?</label>
+        <textarea [(ngModel)]="journal.emociones" name="emociones-{{journal.id}}" ></textarea>
+
+        <label>Pensamientos del día</label>
+        <textarea [(ngModel)]="journal.pensamientos" name="pensamientos-{{journal.id}}"></textarea>
+
+        <label>Notas Adicionales</label>
+        <textarea [(ngModel)]="journal.notasAdicionales" name="notasAdicionales{{journal.id}}"></textarea>
+        <div class="acciones">
+          <button type="submit">💾</button>
+          <button type="button" (click)="cancelarEdicion()">❌</button>
+        </div>
+      </form>
+    </li>
+  </ul>
+
+  <p *ngIf="journals.length === 0">No hay entradas registradas.</p>
+
+  <div class="modal-overlay" *ngIf="modalAbierto">
+  <div class="modal-content">
+    <h3>Detalles del Diario</h3>
+    <p><strong>Fecha:</strong> {{ journalSeleccionado?.fecha | date: 'fullDate' }}</p>
+    <p><strong>Título:</strong> {{ journalSeleccionado?.titulo }}</p>
+    <p><strong>Contenido:</strong> {{ journalSeleccionado?.contenido }}</p>
+    <p *ngIf="journalSeleccionado?.emociones"><strong>¿Cómo te sentiste?:</strong> {{ journalSeleccionado?.emociones }}</p>
+    <p *ngIf="journalSeleccionado?.pensamientos"><strong>Pensamientos:</strong> {{ journalSeleccionado?.pensamientos }}</p>
+    <p *ngIf="journalSeleccionado?.notasAdicionales"><strong>Notas:</strong> {{ journalSeleccionado?.notasAdicionales }}</p>
+
+    <button class="cerrar-btn" (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>
+
+</div>

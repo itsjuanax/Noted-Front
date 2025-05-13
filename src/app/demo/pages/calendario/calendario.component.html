@@ -1,0 +1,69 @@
+ <div class="calendario-container"> 
+  <div class="calendario-header">
+    <button (click)="mesAnterior()">←</button>
+    <h2> {{ meses[mesActual] }} {{ anioActual }} </h2>
+    <button (click)="mesSiguiente()">→</button>
+    <button (click)="irAHoy()">Hoy</button>
+  </div>
+  
+  <div class="calendario-grid">
+    <div class="dia-header" *ngFor="let diaSemana of ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']">
+      {{ diaSemana }}
+    </div>
+  
+    <div *ngFor="let dia of diasDelMes" class="cuadro-dia" [class.clickable]="dia" (click)="dia && abrirCrearEvento(dia)">
+      <ng-container *ngIf="dia; else diaVacio">
+        <div class="numero-dia">{{ dia.getDate() }}</div>
+  
+        <!-- Listar los eventos de ese día -->
+        <div class="eventos-dia" *ngFor="let evento of eventosDelDia(dia)" (click)="verEvento(evento, $event)">
+          <small>{{ evento.titulo }}</small>
+        </div>
+        
+      </ng-container>
+  
+      <ng-template #diaVacio></ng-template>
+    </div>
+  </div>
+
+  <div *ngIf="mostrarCrearModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Crear Evento</h3>
+      <form [formGroup]="eventForm" (ngSubmit)="modoEdicion ? actualizarEvento() : crearEvento()">
+
+        <div class="form-group">
+          <input matInput type="text" formControlName="titulo" placeholder="Título" required />
+        </div>
+        <div class="form-group">
+          <input matInput type="text" formControlName="hora" placeholder="Hora (opcional, HH:mm)" />
+        </div>
+        <div class="form-group">
+          <textarea matInput formControlName="descripcion" placeholder="Descripción (opcional)"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" [disabled]="eventForm.invalid">
+            {{ modoEdicion ? 'Actualizar' : 'Crear' }}  
+          </button>
+          <button type="button" (click)="cerrarModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  
+  <div *ngIf="mostrarDetallesModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>{{ eventoSeleccionado?.titulo }}</h3>
+      <p><strong>Fecha:</strong> {{ eventoSeleccionado?.fecha }}</p>
+      <p *ngIf="eventoSeleccionado?.hora"><strong>Hora:</strong> {{ eventoSeleccionado?.hora }}</p>
+      <p *ngIf="eventoSeleccionado?.descripcion"><strong>Descripción:</strong> {{ eventoSeleccionado?.descripcion }}</p>
+  
+      <div class="modal-actions">
+        <button (click)="editarEvento()">Editar</button>
+        <button (click)="eliminarEvento()">Eliminar</button>
+        <button (click)="cerrarModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+  
+</div>
