@@ -2,12 +2,8 @@
   <ul class="list-unstyled">
     <li>
       <div class="dropdown pc-h-item" ngbDropdown>
-        <a
-          class="pc-head-link head-link-secondary dropdown-toggle arrow-none me-0"
-          data-bs-toggle="dropdown"
-          href="javascript:"
-          ngbDropdownToggle
-        >
+        <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
+          href="javascript:" ngbDropdownToggle>
           <i class="ti ti-bell"></i>
         </a>
         <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
@@ -116,12 +112,8 @@
     </li>
     <li>
       <div class="dropdown pc-h-item header-user-profile" ngbDropdown>
-        <a
-          class="pc-head-link head-link-primary dropdown-toggle arrow-none me-0"
-          data-bs-toggle="dropdown"
-          href="javascript:"
-          ngbDropdownToggle
-        >
+        <a class="pc-head-link head-link-primary dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
+          href="javascript:" ngbDropdownToggle>
           <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar" />
           <span>
             <i class="ti ti-settings"></i>
@@ -138,10 +130,11 @@
                 <i class="ti ti-settings"></i>
                 <span>Account Profile</span>
               </a>
-              <a [routerLink]="['/guest/login']" class="dropdown-item">
+              <a (click)="logout()" class="dropdown-item" style="cursor: pointer;">
                 <i class="ti ti-logout"></i>
                 <span>Logout</span>
               </a>
+
             </ng-scrollbar>
           </div>
         </div>
