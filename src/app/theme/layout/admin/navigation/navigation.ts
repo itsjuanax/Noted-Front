@@ -128,6 +128,23 @@ export const NavigationItems: NavigationItem[] = [
           }
         ]
       },
+      {
+        id: 'moodWeekly',
+        title: 'Mood Tracker Weekly',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/moodWeekly',
+        icon: 'ti ti-mood-smile'
+      },
+
+      {
+        id: 'moodMonthly',
+        title: 'Mood Tracker Monthly',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/moodMonthly',
+        icon: 'ti ti-masks-theater'
+      }
       
 
 

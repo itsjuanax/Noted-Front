@@ -64,13 +64,11 @@ export class HistorialComponent implements OnInit {
       this.waterService.updateWaterTracker(waterId, waterActualizado).subscribe({
         next: (res) => {
           console.log('Water actualizado:', res);
-
+          this.alertService.alertaSuccess('success', 'Registro actualizado exitosamente');
+          this.editandoId = null;
           if (waterActualizado.litrosTomadosDia >= 2) {
             this.alertService.alertaCumplimientoMeta();
           }
-
-          this.alertService.alertaSuccess('success', 'Registro actualizado exitosamente');
-          this.editandoId = null;
           this.ngOnInit();
         },
         error: (err) => {

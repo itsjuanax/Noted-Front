@@ -1,0 +1,46 @@
+<div class="todo-container">
+  <h2>{{ rangoSemana }}</h2>
+
+  <div class="nav-buttons">
+    <button (click)="anterior()">⟵ Anterior</button>
+    <button (click)="hoy()">Hoy</button>
+    <button (click)="siguiente()">Siguiente ⟶</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Día</th>
+        <th *ngFor="let emo of emociones">{{ emo | titlecase }}</th>
+        <th>Otras</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fecha of semana; let i = index">
+        <td><strong>{{ dias[i] }}<br>{{ fecha | date:'dd/MM' }}</strong></td>
+        <td *ngFor="let emo of emociones">
+          <input type="number" [formControl]="getFormControl(getFechaFormateada(fecha), emo)" min="0" max="5" />
+
+
+        </td>
+        <td>
+          <input type="number" [formControl]="getFormControl(getFechaFormateada(fecha), 'otras')" min="0" max="5" />
+
+
+        <td>
+          <button class="btn-guardar" (click)="guardar(fecha)">💾</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="otrosLista.length > 0" class="otros-lista">
+    <h3>Registros adicionales ("Otras")</h3>
+    <ul>
+      <li *ngFor="let item of otrosLista">
+        {{ item.fecha }}: {{ item.valor }}
+      </li>
+    </ul>
+  </div>
+</div>

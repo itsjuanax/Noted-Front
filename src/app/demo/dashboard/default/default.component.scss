@@ -1,25 +1,95 @@
-.nav-tabs {
-  border-bottom: none !important;
-}
-body.berry-dark .nav-tabs .nav-link,
-body.berry-dark .tab-content {
-  box-shadow: none !important;
-  background: none !important;
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.earning-card {
-  .round {
-    &.secondary-round {
-      background: #4527a0;
-    }
-    &.primary-round {
-      background: #1565c0;
-    }
+h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.frase-dia {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+.grid-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.icono {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+p {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Colores pasteles adaptados */
+.pastel-verde {
+  background-color: #d4f8e8;
+}
+
+.pastel-azul {
+  background-color: #d0ebff;
+}
+
+.pastel-lila {
+  background-color: #e0d7f5;
+}
+
+.pastel-azul-claro {
+  background-color: #e3f2fd;
+}
+
+.pastel-amarillo {
+  background-color: #fff3cd;
+}
+
+/* Responsive para celulares */
+@media (max-width: 600px) {
+  .grid-dashboard {
+    grid-template-columns: 1fr;
   }
 }
 
-.total-income-card {
-  .avatar {
-    background: #1565c0;
-  }
+/* Nuevos colores pasteles */
+.pastel-azul-fuerte {
+  background-color: #d6e4f0;
+}
+
+.pastel-lila-claro {
+  background-color: #e7dafb;
+}
+
+.pastel-rosa {
+  background-color: #ffe0f0;
 }

@@ -1,0 +1,35 @@
+<div class="todo-container">
+  <h2>Mood Tracker {{ nombreMes() | titlecase }} {{ year }}</h2>
+
+  <div class="nav-buttons">
+    <button (click)="mesAnterior()">⟵ Anterior</button>
+    <button (click)="mesSiguiente()">Siguiente ⟶</button>
+  </div>
+
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th *ngFor="let d of diasSemana">{{ d }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let semana of calendario">
+        <td *ngFor="let dia of semana"
+            [style.backgroundColor]="getColor(dia)"
+            (click)="dia && pintar(dia)">
+          <span *ngIf="dia">{{ dia.getDate() }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="palette-wrapper">
+    <div class="palette-item" *ngFor="let emo of emociones" (click)="seleccionarEmocion(emo.nombre)">
+      <div class="color-box"
+           [style.backgroundColor]="emo.color"
+           [class.selected]="emocionSeleccionada === emo.nombre">
+      </div>
+      <div class="label">{{ emo.nombre }}</div>
+    </div>
+  </div>
+</div>

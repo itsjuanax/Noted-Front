@@ -34,6 +34,7 @@ export class AlertService {
       confirmButtonText: 'Aceptar'
     });
   }
+  
   alertaConConfirmacion(title:string, text: string){
     return Swal.fire({
       icon:"warning",
@@ -42,7 +43,7 @@ export class AlertService {
       showCancelButton: true,
       confirmButtonText: "Aceptar",
       cancelButtonText:"Cancelar",
-    })
+    });
   }
   
 

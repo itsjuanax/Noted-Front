@@ -1,126 +1,55 @@
-<div class="row">
-  <div class="col-xl-4 col-md-6">
-    <div class="card earning-card bg-secondary-dark text-white overflow-hidden">
-      <span class="round secondary-round small"></span>
-      <span class="round secondary-round big"></span>
-      <div class="card-body">
-        <div class="row">
-          <div class="col">
-            <div class="avatar avatar-lg">
-              <i class="text-white ti ti-credit-card f-24"></i>
-            </div>
-          </div>
-          <div class="col-auto">
-            <div class="btn-group" ngbDropdown>
-              <a type="button" class="avatar avatar-xs bg-secondary dropdown-toggle arrow-none" ngbDropdownToggle>
-                <i class="ti ti-dots"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-                <li><button class="dropdown-item" type="button">Import Card</button></li>
-                <li><button class="dropdown-item" type="button">Export</button></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <span class="text-white d-block f-34 f-w-500 my-2">
-          $500.00
-          <i class="ti ti-circle-arrow-up-right opacity-50"></i>
-        </span>
-        <p class="mb-0 opacity-50">Total Earning</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-4 col-md-6">
-    <div class="card earning-card bg-primary-dark text-white overflow-hidden">
-      <span class="round primary-round small"></span>
-      <span class="round primary-round big"></span>
-      <div class="card-body">
-        <app-chart-data-month />
-      </div>
-    </div>
-  </div>
-  <div class="col-xl-4 col-md-12">
-    <div class="card total-income-card overflow-hidden bg-primary-dark text-white">
-      <div class="card-body">
-        <div class="d-flex align-items-center">
-          <div class="avatar avatar-lg icon m-r-5">
-            <i class="text-white ti ti-layout-board-split f-24"></i>
-          </div>
-          <div class="ms-2">
-            <h4 class="text-white f-w-600 mb-1">$203k</h4>
-            <p class="mb-0 opacity-50 text-sm">Total Income</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card total-income-card warning overflow-hidden">
-      <div class="card-body">
-        <div class="d-flex align-items-center">
-          <div class="avatar avatar-lg icon-warning m-r-5">
-            <i class="text-warning ti ti-layout-board-split f-24"></i>
-          </div>
-          <div class="ms-2">
-            <h4 class="f-w-600 mb-1">$203k</h4>
-            <p class="mb-0 opacity-50 text-sm">Total Income</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="dashboard-container">
+  <h2>¡Bienvenido a tu espacio personal! ✨</h2>
+  <p class="frase-dia">"{{ fraseDelDia }}"</p>
 
-  <div class="col-xl-8 col-md-12">
-    <app-bar-chart />
-  </div>
-  <div class="col-xl-4 col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="row mb-3 align-items-center">
-          <div class="col">
-            <h4>Popular Stocks</h4>
-          </div>
-          <div class="col-auto"></div>
-        </div>
-        <div class="rounded bg-light-secondary overflow-hidden mb-3">
-          <div class="px-3 pt-3">
-            <div class="row mb-1 align-items-start">
-              <div class="col">
-                <h5 class="text-secondary mb-0">Bajaj Finery</h5>
-                <small class="text-muted">10% Profit</small>
-              </div>
-              <div class="col-auto">
-                <h4 class="mb-0">$1839.00</h4>
-              </div>
-            </div>
-          </div>
-          <app-bajaj-chart />
-        </div>
-        <ul class="list-group list-group-flush">
-          @for (list of ListGroup; track list) {
-            <li class="list-group-item px-0 {{ list.space }}">
-              <div class="row align-items-start">
-                <div class="col">
-                  <h5 class="mb-0">{{ list.name }}</h5>
-                  <small class="{{ list.color }}">{{ list.profit }}</small>
-                </div>
-                <div class="col-auto">
-                  <h4 class="mb-0">
-                    {{ list.invest }}
-                    <span class="ms-2 align-top avatar avatar-xxs {{ list.bgColor }}">
-                      <i class="{{ list.icon }} {{ list.color }}"></i>
-                    </span>
-                  </h4>
-                </div>
-              </div>
-            </li>
-          }
-        </ul>
-        <div class="text-center">
-          <a href="javascript:" class="b-b-primary text-primary f-w-500">
-            View all
-            <i class="ti ti-chevron-right"></i>
-          </a>
-        </div>
-      </div>
+  <div class="grid-dashboard">
+    <div class="card pastel-verde">
+      <div class="icono">🌱</div>
+      <h3>Crece cada día</h3>
+      <p>Pequeños pasos construyen grandes caminos.</p>
+    </div>
+
+    <div class="card pastel-azul">
+      <div class="icono">🌟</div>
+      <h3>Aprovecha hoy</h3>
+      <p>Hoy es una nueva oportunidad para avanzar.</p>
+    </div>
+
+    <div class="card pastel-lila">
+      <div class="icono">📚</div>
+      <h3>Aprende siempre</h3>
+      <p>Cada experiencia es una lección.</p>
+    </div>
+
+    <div class="card pastel-azul-claro">
+      <div class="icono">🧘‍♀️</div>
+      <h3>Encuentra tu paz</h3>
+      <p>Confía en el proceso y mantente en calma.</p>
+    </div>
+
+    <!-- Segunda fila nuevas -->
+    <div class="card pastel-amarillo">
+      <div class="icono">🚀</div>
+      <h3>Confía en ti</h3>
+      <p>Tu esfuerzo te lleva más lejos de lo que imaginas.</p>
+    </div>
+
+    <div class="card pastel-azul-fuerte">
+      <div class="icono">🎯</div>
+      <h3>Enfócate en tu meta</h3>
+      <p>Cada acción te acerca más.</p>
+    </div>
+
+    <div class="card pastel-lila-claro">
+      <div class="icono">🧠</div>
+      <h3>Sigue aprendiendo</h3>
+      <p>El conocimiento es tu mejor herramienta.</p>
+    </div>
+
+    <div class="card pastel-rosa">
+      <div class="icono">🌈</div>
+      <h3>Disfruta el proceso</h3>
+      <p>Cada paso es parte del camino.</p>
     </div>
   </div>
 </div>

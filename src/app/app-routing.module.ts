@@ -54,6 +54,14 @@ const routes: Routes = [
         loadComponent: () => import('./demo/pages/waterTracker/historial/historial.component').then((c) => c.HistorialComponent)
       },
       {
+        path: 'moodWeekly',
+        loadComponent: () => import('./demo/pages/mood-weekly-tracker/mood-weekly-tracker.component').then((c) => c.MoodWeeklyTrackerComponent)
+      },
+      {
+        path: 'moodMonthly',
+        loadComponent: () => import('./demo/pages/mood-monthly-tracker/mood-monthly-tracker.component').then((c) => c.MoodMonthlyTrackerComponent)
+      },
+      {
         path: 'typography',
         loadComponent: () => import('./demo/elements/typography/typography.component')
       },
