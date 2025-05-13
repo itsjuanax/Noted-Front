@@ -1,6 +1,7 @@
 // Angular import
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 // third party import
 import { SharedModule } from 'src/app/theme/shared/shared.module';
@@ -18,8 +19,9 @@ export class NavRightComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     const userId = this.authService.getUserIdFromToken();
@@ -35,4 +37,17 @@ export class NavRightComponent implements OnInit {
       });
     }
   }
+
+  resetUsuario() {
+    this.nombreUsuario = 'Invitado';
+  }
+
+  logout() {
+    localStorage.removeItem('AuthToken');
+    this.resetUsuario();
+    this.router.navigate(['/guest/login']);
+  }
+
 }
+
+
